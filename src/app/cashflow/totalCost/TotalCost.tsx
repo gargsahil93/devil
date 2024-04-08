@@ -32,7 +32,6 @@ export default function TotalCost() {
   }, [costHeads]);
 
   const updateCost = (cost: CostHeadType) => {
-    console.log(cost);
     setCostHeads(() => {
       const newCostHeads = costHeads.map((costHead) => {
         if (costHead.id === cost.id) {

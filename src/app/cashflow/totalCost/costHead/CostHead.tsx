@@ -56,7 +56,7 @@ export default ({
           value={'' + gst}
           setValue={updateValue}
           id={`gst_${id}`}
-          name={`value_${id}`}
+          name={`gst_${id}`}
         />
       </span>
       <span className="rowCell gstValue">{((value || 0) * gst) / 100}</span>
