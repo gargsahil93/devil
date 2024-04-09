@@ -59,7 +59,7 @@ export default function TotalCost() {
           {costHeads.map((costHead) => (
             <CostHead cost={costHead} setCost={updateCost} key={costHead.id} />
           ))}
-          <div className="costHeadRow total">
+          <div className="costHeadRow totalRow">
             <span className="rowCell">Total</span>
             <span className="rowCell"></span>
             <span className="rowCell"></span>

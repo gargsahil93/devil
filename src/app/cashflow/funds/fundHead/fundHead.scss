@@ -1,0 +1,10 @@
+.fundHead {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+
+  .cell {
+    flex: 1;
+  }
+}

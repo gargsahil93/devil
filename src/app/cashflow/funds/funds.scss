@@ -1,0 +1,16 @@
+.fundHeads {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fundHeadHeader {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 1rem;
+
+  .headerCell {
+    flex: 1;
+  }
+}

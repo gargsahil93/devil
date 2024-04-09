@@ -27,39 +27,40 @@ export default function PropertyDetails({}) {
   };
 
   return (
-    <div className="propertyDetails">
-      <span className="item">
-        <TextField
-          variant="outlined"
-          label="Property name"
-          name={PropertyDetailFields.NAME}
-          value={details && details[PropertyDetailFields.NAME]}
-          defaultValue="."
-          onChange={(e) =>
-            updateDetails(PropertyDetailFields.NAME, e.target.value)
-          }
-        />
-      </span>
-      <span className="item">
-        <DatePicker
-          label="Booking date"
-          name={PropertyDetailFields.BOOKING_DATE}
-          value={details && details[PropertyDetailFields.BOOKING_DATE]}
-          onChange={(newDate) =>
-            updateDetails(PropertyDetailFields.BOOKING_DATE, newDate)
-          }
-        />
-      </span>
-      <span className="item">
-        <DatePicker
-          label="Possesion date"
-          name={PropertyDetailFields.POSSESION_DATE}
-          onChange={(newDate) =>
-            updateDetails(PropertyDetailFields.POSSESION_DATE, newDate)
-          }
-          value={details && details[PropertyDetailFields.POSSESION_DATE]}
-        />
-      </span>
-    </div>
+    details && (
+      <div className="propertyDetails">
+        <span className="item">
+          <TextField
+            variant="outlined"
+            label="Property name"
+            name={PropertyDetailFields.NAME}
+            value={details[PropertyDetailFields.NAME] || ''}
+            onChange={(e) =>
+              updateDetails(PropertyDetailFields.NAME, e.target.value)
+            }
+          />
+        </span>
+        <span className="item">
+          <DatePicker
+            label="Booking date"
+            name={PropertyDetailFields.BOOKING_DATE}
+            value={details[PropertyDetailFields.BOOKING_DATE]}
+            onChange={(newDate) =>
+              updateDetails(PropertyDetailFields.BOOKING_DATE, newDate)
+            }
+          />
+        </span>
+        <span className="item">
+          <DatePicker
+            label="Possesion date"
+            name={PropertyDetailFields.POSSESION_DATE}
+            onChange={(newDate) =>
+              updateDetails(PropertyDetailFields.POSSESION_DATE, newDate)
+            }
+            value={details[PropertyDetailFields.POSSESION_DATE]}
+          />
+        </span>
+      </div>
+    )
   );
 }

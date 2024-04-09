@@ -8,6 +8,7 @@ import TotalCost from './totalCost/TotalCost';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import PropertyDetails from './propertyDetails/PropertyDetails';
+import Funds from './funds/Funds';
 
 export default function Cashflow({}) {
   return (
@@ -15,6 +16,7 @@ export default function Cashflow({}) {
       <div className="cashflowWrapper">
         <PropertyDetails />
         <TotalCost />
+        <Funds />
       </div>
     </LocalizationProvider>
   );
