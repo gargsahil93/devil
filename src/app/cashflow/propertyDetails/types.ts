@@ -7,7 +7,7 @@ export enum PropertyDetailFields {
   POSSESION_DATE = 'possesionDate',
 }
 
-export type PropertyDetails = {
+export type PropertyDetailsType = {
   [PropertyDetailFields.NAME]?: string;
   [PropertyDetailFields.ID]?: string;
   [PropertyDetailFields.BOOKING_DATE]?: Dayjs | null;

@@ -5,12 +5,12 @@ import {
 import {
   PROPERTY_DETAILS_KEY,
   PropertyDetailFields,
-  PropertyDetails,
+  PropertyDetailsType,
 } from './types';
 import dayjs, { Dayjs } from 'dayjs';
 
-export const getPropertyDetails = (): PropertyDetails => {
-  const details: PropertyDetails = getLocalStorage(PROPERTY_DETAILS_KEY);
+export const getPropertyDetails = (): PropertyDetailsType => {
+  const details: PropertyDetailsType = getLocalStorage(PROPERTY_DETAILS_KEY);
   details[PropertyDetailFields.BOOKING_DATE] = dayjs(
     details[PropertyDetailFields.BOOKING_DATE],
   );
@@ -21,6 +21,6 @@ export const getPropertyDetails = (): PropertyDetails => {
   return details;
 };
 
-export const setPropertyDetails = (details: PropertyDetails) => {
+export const setPropertyDetails = (details: PropertyDetailsType) => {
   setLocalStorage(PROPERTY_DETAILS_KEY, details);
 };

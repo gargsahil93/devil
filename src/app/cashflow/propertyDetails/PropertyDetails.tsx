@@ -2,12 +2,12 @@ import { TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
 import './propertyDetails.scss';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { PropertyDetailFields, PropertyDetails } from './types';
+import { PropertyDetailFields, PropertyDetailsType } from './types';
 import { getPropertyDetails, setPropertyDetails } from './PropertyDetailsModel';
 import { Dayjs } from 'dayjs';
 
 export default function PropertyDetails({}) {
-  const [details, setDetails] = useState<PropertyDetails>();
+  const [details, setDetails] = useState<PropertyDetailsType>();
   useEffect(() => {
     setDetails(getPropertyDetails());
   }, []);

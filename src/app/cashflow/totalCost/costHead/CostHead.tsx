@@ -12,13 +12,13 @@ import './costHead.scss';
 import { CostHeadFields, CostHeadType, PaymentScheduleType } from '../types';
 import { ChangeEvent } from 'react';
 
-export default ({
+export default function CostHead({
   cost,
   setCost,
 }: {
   cost: CostHeadType;
   setCost: (cost: CostHeadType) => void;
-}) => {
+}) {
   const updateValue = (
     e: ChangeEvent<HTMLInputElement> | SelectChangeEvent<PaymentScheduleType>,
   ) => {
@@ -86,4 +86,4 @@ export default ({
       </span>
     </div>
   );
-};
+}
