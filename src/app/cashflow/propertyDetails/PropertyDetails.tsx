@@ -6,7 +6,7 @@ import { PropertyDetailFields, PropertyDetails } from './types';
 import { getPropertyDetails, setPropertyDetails } from './PropertyDetailsModel';
 import { Dayjs } from 'dayjs';
 
-export default () => {
+export default function PropertyDetails({}) {
   const [details, setDetails] = useState<PropertyDetails>();
   useEffect(() => {
     setDetails(getPropertyDetails());
@@ -62,4 +62,4 @@ export default () => {
       </span>
     </div>
   );
-};
+}
