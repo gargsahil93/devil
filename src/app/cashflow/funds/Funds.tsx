@@ -1,7 +1,6 @@
 import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { FundType } from './types';
-import nextId from 'react-id-generator';
 import FundHead from './fundHead/FundHead';
 
 import './funds.scss';
