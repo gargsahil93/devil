@@ -19,4 +19,5 @@ export type CostHeadType = {
 export enum PaymentScheduleType {
   ONE_TIME = 1,
   INSTALLMENTS = 2,
+  CUSTOM = 3,
 }

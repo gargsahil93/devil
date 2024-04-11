@@ -9,7 +9,7 @@ import {
 import { ChangeEvent, useEffect, useState } from 'react';
 import './totalCost.scss';
 import CostHead from './costHead/CostHead';
-import { CostHeadType } from './types';
+import { CostHeadType } from '../types/cost';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 
 export default function TotalCost() {

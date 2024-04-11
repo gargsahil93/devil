@@ -9,7 +9,11 @@ import {
 import { SelectChangeEvent } from '@mui/material/Select';
 import NumberInput from 'app/components/NumberInput';
 import './costHead.scss';
-import { CostHeadFields, CostHeadType, PaymentScheduleType } from '../types';
+import {
+  CostHeadFields,
+  CostHeadType,
+  PaymentScheduleType,
+} from 'app/cashflow/types/cost';
 import { ChangeEvent } from 'react';
 
 export default function CostHead({

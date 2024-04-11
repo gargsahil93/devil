@@ -1,7 +1,4 @@
-import {
-  CostHeadType,
-  PaymentScheduleType,
-} from 'app/cashflow/totalCost/types';
+import { CostHeadType, PaymentScheduleType } from 'app/cashflow/types/cost';
 import {
   getLocalStorage,
   setLocalStorage,
