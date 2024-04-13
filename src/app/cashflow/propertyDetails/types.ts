@@ -10,8 +10,8 @@ export enum PropertyDetailFields {
 export type PropertyDetailsType = {
   [PropertyDetailFields.NAME]?: string;
   [PropertyDetailFields.ID]?: string;
-  [PropertyDetailFields.BOOKING_DATE]?: Dayjs | null;
-  [PropertyDetailFields.POSSESION_DATE]?: Dayjs | null;
+  [PropertyDetailFields.BOOKING_DATE]?: string;
+  [PropertyDetailFields.POSSESION_DATE]?: string;
 };
 
 export const PROPERTY_DETAILS_KEY = 'propertyDetails';

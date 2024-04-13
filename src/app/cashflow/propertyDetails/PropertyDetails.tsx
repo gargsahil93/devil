@@ -1,40 +1,46 @@
 import { TextField } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
-import './propertyDetails.scss';
-import { ChangeEvent, useEffect, useState } from 'react';
-import { PropertyDetailFields, PropertyDetailsType } from './types';
+import dayjs, { Dayjs } from 'dayjs';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  selectPropertyDetails,
+  updatePropertyDetails,
+} from '../lib/reducers/propertyDetailsSlice';
 import { getPropertyDetails, setPropertyDetails } from './PropertyDetailsModel';
-import { Dayjs } from 'dayjs';
+import './propertyDetails.scss';
+import { PropertyDetailFields } from './types';
 
 export default function PropertyDetails({}) {
-  const [details, setDetails] = useState<PropertyDetailsType>();
+  const propertyDetails = useSelector(selectPropertyDetails);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    setDetails(getPropertyDetails());
+    dispatch(updatePropertyDetails(getPropertyDetails()));
   }, []);
 
   const updateDetails = (
     key: PropertyDetailFields,
     value?: string | Dayjs | null,
   ) => {
-    setDetails((details) => {
-      const newDetails = {
-        ...details,
-        [key]: value,
-      };
-      setPropertyDetails(newDetails);
-      return newDetails;
-    });
+    const newDetails = {
+      ...propertyDetails,
+      [key]: value,
+    };
+    setPropertyDetails(newDetails);
+    dispatch(updatePropertyDetails({ [key]: value }));
   };
 
   return (
-    details && (
+    propertyDetails && (
       <div className="propertyDetails">
         <span className="item">
           <TextField
             variant="outlined"
             label="Property name"
             name={PropertyDetailFields.NAME}
-            value={details[PropertyDetailFields.NAME] || ''}
+            value={propertyDetails[PropertyDetailFields.NAME] || ''}
             onChange={(e) =>
               updateDetails(PropertyDetailFields.NAME, e.target.value)
             }
@@ -44,9 +50,16 @@ export default function PropertyDetails({}) {
           <DatePicker
             label="Booking date"
             name={PropertyDetailFields.BOOKING_DATE}
-            value={details[PropertyDetailFields.BOOKING_DATE]}
+            value={
+              propertyDetails[PropertyDetailFields.BOOKING_DATE]
+                ? dayjs(propertyDetails[PropertyDetailFields.BOOKING_DATE])
+                : null
+            }
             onChange={(newDate) =>
-              updateDetails(PropertyDetailFields.BOOKING_DATE, newDate)
+              updateDetails(
+                PropertyDetailFields.BOOKING_DATE,
+                newDate ? newDate.toISOString() : '',
+              )
             }
           />
         </span>
@@ -55,9 +68,16 @@ export default function PropertyDetails({}) {
             label="Possesion date"
             name={PropertyDetailFields.POSSESION_DATE}
             onChange={(newDate) =>
-              updateDetails(PropertyDetailFields.POSSESION_DATE, newDate)
+              updateDetails(
+                PropertyDetailFields.POSSESION_DATE,
+                newDate ? newDate.toISOString() : '',
+              )
             }
-            value={details[PropertyDetailFields.POSSESION_DATE]}
+            value={
+              propertyDetails[PropertyDetailFields.POSSESION_DATE]
+                ? dayjs(propertyDetails[PropertyDetailFields.POSSESION_DATE])
+                : null
+            }
           />
         </span>
       </div>
