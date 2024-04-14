@@ -18,10 +18,14 @@ import { ChangeEvent } from 'react';
 
 export default function CostHead({
   cost,
-  setCost,
+  updateCostHead,
 }: {
   cost: CostHeadType;
-  setCost: (cost: CostHeadType) => void;
+  updateCostHead: (
+    id: string,
+    key: CostHeadFields,
+    value?: string | number | boolean,
+  ) => void;
 }) {
   const updateValue = (
     e: ChangeEvent<HTMLInputElement> | SelectChangeEvent<PaymentScheduleType>,
@@ -40,7 +44,7 @@ export default function CostHead({
       default:
         return;
     }
-    setCost({ ...cost, [key]: value });
+    updateCostHead(cost.id, key, value);
   };
 
   const { label, value, gst, id, paymentSchedule, tdsApplicable } = cost;
@@ -63,21 +67,29 @@ export default function CostHead({
           name={`gst_${id}`}
         />
       </span>
-      <span className="rowCell gstValue">{((value || 0) * gst) / 100}</span>
-      <span className="rowCell total">{(value || 0) * (1 + gst / 100)}</span>
+      <span className="rowCell gstValue">
+        {(((value || 0) * gst) / 100).toFixed(2)}
+      </span>
+      <span className="rowCell total">
+        {((value || 0) * (1 + gst / 100)).toFixed(2)}
+      </span>
       <span className="rowCell tds">
         <Switch
           checked={tdsApplicable}
           onChange={updateValue}
           name={`tdsApplicable_${id}`}
+          size="small"
         />
       </span>
       <span className="rowCell paymentSchedule">
         <FormControl fullWidth>
           <Select
+            id={`paymentSchedule_${id}`}
             name={`paymentSchedule_${id}`}
             value={paymentSchedule}
             onChange={updateValue}
+            variant="standard"
+            size="small"
           >
             <MenuItem value={PaymentScheduleType.ONE_TIME}>
               One time payment

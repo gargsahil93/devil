@@ -3,12 +3,23 @@
   gap: 1rem;
   width: 100%;
   align-items: center;
+  height: 2rem;
 }
 
 .rowCell {
   flex: 1;
+  overflow: hidden;
+}
+
+.head {
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
 }
 
 .gst {
   flex: 1;
+}
+
+.paymentSchedule {
+  overflow: hidden;
 }

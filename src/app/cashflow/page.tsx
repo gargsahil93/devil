@@ -1,15 +1,13 @@
 'use client';
 
-import { TextField } from '@mui/material';
 import './page.scss';
-import { ChangeEvent, useEffect, useState } from 'react';
-import NumberInput from 'app/components/NumberInput';
 import TotalCost from './totalCost/TotalCost';
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
+import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import PropertyDetails from './propertyDetails/PropertyDetails';
 import Funds from './funds/Funds';
 import StoreProvider from './StateProvider';
+import Grid from './grid/Grid';
 // import store from 'app/cashflow/lib/store';
 
 export default function Cashflow({}) {
@@ -18,7 +16,8 @@ export default function Cashflow({}) {
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <div className="cashflowWrapper">
           <PropertyDetails />
-          <TotalCost />
+          <Grid />
+          {/* <TotalCost /> */}
           <Funds />
         </div>
       </LocalizationProvider>

@@ -1,5 +1,3 @@
-import { Dayjs } from 'dayjs';
-
 export enum PropertyDetailFields {
   ID = 'id',
   NAME = 'name',

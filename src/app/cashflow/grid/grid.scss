@@ -1,0 +1,53 @@
+.grid {
+  width: 100%;
+  min-height: 400px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+
+  .cost {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    display: grid;
+    overflow-y: scroll;
+  }
+
+  .savings {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    display: grid;
+    overflow-y: scroll;
+    background-color: yellow;
+  }
+
+  .calendar {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+    display: grid;
+    overflow-y: scroll;
+    background-color: green;
+  }
+
+  .gridRow {
+    min-height: 2rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    .gridCol {
+      height: 100%;
+      min-width: 10rem;
+      flex-shrink: 0;
+    }
+  }
+
+  .headerRow {
+    font-weight: bold;
+  }
+}

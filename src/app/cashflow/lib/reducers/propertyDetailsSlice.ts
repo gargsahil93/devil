@@ -4,7 +4,8 @@ import dayjs, { Dayjs } from 'dayjs';
 import {
   PropertyDetailFields,
   PropertyDetailsType,
-} from 'app/cashflow/propertyDetails/types';
+} from 'app/cashflow/types/propertyDetails';
+import { setPropertyDetails } from 'app/cashflow/propertyDetails/PropertyDetailsModel';
 
 export const propertyDetailsSlice = createSlice({
   name: 'propertyDetails',
@@ -15,7 +16,9 @@ export const propertyDetailsSlice = createSlice({
   },
   reducers: {
     updatePropertyDetails: (state, action) => {
-      return { ...state, ...action.payload };
+      const newState = { ...state, ...action.payload };
+      setPropertyDetails(newState);
+      return newState;
     },
   },
 });

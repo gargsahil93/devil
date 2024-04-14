@@ -9,7 +9,7 @@ import {
 } from '../lib/reducers/propertyDetailsSlice';
 import { getPropertyDetails, setPropertyDetails } from './PropertyDetailsModel';
 import './propertyDetails.scss';
-import { PropertyDetailFields } from './types';
+import { PropertyDetailFields } from '../types/propertyDetails';
 
 export default function PropertyDetails({}) {
   const propertyDetails = useSelector(selectPropertyDetails);
@@ -28,7 +28,6 @@ export default function PropertyDetails({}) {
       ...propertyDetails,
       [key]: value,
     };
-    setPropertyDetails(newDetails);
     dispatch(updatePropertyDetails({ [key]: value }));
   };
 
@@ -61,6 +60,7 @@ export default function PropertyDetails({}) {
                 newDate ? newDate.toISOString() : '',
               )
             }
+            format="DD/MMM/YYYY"
           />
         </span>
         <span className="item">
@@ -78,6 +78,7 @@ export default function PropertyDetails({}) {
                 ? dayjs(propertyDetails[PropertyDetailFields.POSSESION_DATE])
                 : null
             }
+            format="DD/MMM/YYYY"
           />
         </span>
       </div>

@@ -33,7 +33,8 @@ export default function NumberInput({
 
   return (
     <TextField
-      variant="outlined"
+      size="small"
+      variant="standard"
       label={label}
       onChange={inputChanged}
       value={localValue}

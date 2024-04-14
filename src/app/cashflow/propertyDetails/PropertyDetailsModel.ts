@@ -4,10 +4,8 @@ import {
 } from 'app/helpers/localStorageHelper';
 import {
   PROPERTY_DETAILS_KEY,
-  PropertyDetailFields,
   PropertyDetailsType,
-} from './types';
-import dayjs, { Dayjs } from 'dayjs';
+} from '../types/propertyDetails';
 
 export const getPropertyDetails = (): PropertyDetailsType => {
   const details: PropertyDetailsType = {
