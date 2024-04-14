@@ -23,19 +23,9 @@ import {
   EditOutlined,
 } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
-import { deleteCostHead } from '../lib/reducers/costSlice';
+import { deleteCostHead, updateCostHead } from '../lib/reducers/costSlice';
 
-export default function CostHead({
-  cost,
-  updateCostHead,
-}: {
-  cost: CostHeadType;
-  updateCostHead: (
-    id: string,
-    key: CostHeadFields,
-    value?: string | number | boolean,
-  ) => void;
-}) {
+export default function CostHead({ cost }: { cost: CostHeadType }) {
   const dispatch = useDispatch();
   const [editHead, setEditHead] = useState(cost.label === '');
 
@@ -63,7 +53,7 @@ export default function CostHead({
       default:
         return;
     }
-    updateCostHead(cost.id, key, value);
+    dispatch(updateCostHead({ id, key, value }));
   };
 
   return (

@@ -25,14 +25,6 @@ export default function Cost({ className }: { className: string }) {
     dispatch(updateCost(getCostHeads()));
   }, [dispatch]);
 
-  const updateHead = (
-    id: string,
-    key: CostHeadFields,
-    value?: number | string | boolean,
-  ) => {
-    dispatch(updateCostHead({ id, key, value }));
-  };
-
   return (
     <div className={className}>
       <div className="gridRow headerRow">
@@ -46,7 +38,7 @@ export default function Cost({ className }: { className: string }) {
         <div className="gridCol headerCol">PAYMENT SCHEDULE</div>
       </div>
       {costHeads.map((head, idx) => (
-        <CostHead cost={head} updateCostHead={updateHead} key={idx} />
+        <CostHead cost={head} key={idx} />
       ))}
       <div className="gridRow">
         <div className="gridCol">
