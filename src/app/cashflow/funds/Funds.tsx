@@ -14,7 +14,7 @@ export default function Funds({ className }: { className: string }) {
   const funds = useSelector(selectFund);
 
   useEffect(() => {
-    dispatch(updateFunds(getFunds()));
+    dispatch(updateFunds(getFunds() || []));
   }, [dispatch]);
 
   return (

@@ -49,9 +49,11 @@ export default function PropertyDetails({}) {
                 : null
             }
             onChange={(newDate) =>
+              newDate &&
+              newDate.isValid() &&
               updateDetails(
                 PropertyDetailFields.BOOKING_DATE,
-                newDate ? newDate.toISOString() : '',
+                newDate.toISOString(),
               )
             }
             format="DD/MM/YYYY"
@@ -62,9 +64,11 @@ export default function PropertyDetails({}) {
             label="Possesion date"
             name={PropertyDetailFields.POSSESION_DATE}
             onChange={(newDate) =>
+              newDate &&
+              newDate.isValid() &&
               updateDetails(
                 PropertyDetailFields.POSSESION_DATE,
-                newDate ? newDate.toISOString() : '',
+                newDate.toISOString(),
               )
             }
             value={

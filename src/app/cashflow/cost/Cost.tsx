@@ -22,7 +22,7 @@ export default function Cost({ className }: { className: string }) {
   const costHeads = useSelector(selectCost);
 
   useEffect(() => {
-    dispatch(updateCost(getCostHeads()));
+    dispatch(updateCost(getCostHeads() || []));
   }, [dispatch]);
 
   return (

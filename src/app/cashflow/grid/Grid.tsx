@@ -23,10 +23,6 @@ export default function Grid() {
   const [targetDates, setTargetDates] = useState<Array<string>>([]);
 
   useEffect(() => {
-    dispatch(updateCost(getCostHeads()));
-  }, [dispatch]);
-
-  useEffect(() => {
     setShowCalendarView(
       !!(propertyDetails.bookingDate && propertyDetails.possesionDate),
     );
