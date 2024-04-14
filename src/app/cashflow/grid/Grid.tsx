@@ -7,6 +7,7 @@ import { selectCost, updateCost } from '../lib/reducers/costSlice';
 import { getCostHeads } from 'app/initialData/costHeads';
 import CostHead from '../costHead/CostHead';
 import Cost from '../cost/Cost';
+import Funds from '../funds/Funds';
 
 const dateToString = (date: Date) => {
   return date.toLocaleDateString();
@@ -23,7 +24,7 @@ export default function Grid() {
 
   useEffect(() => {
     dispatch(updateCost(getCostHeads()));
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     setShowCalendarView(
@@ -48,15 +49,7 @@ export default function Grid() {
   return (
     <div className="grid">
       <Cost className="cost" />
-      <div className="savings">
-        <div className="gridRow headerRow">
-          <div className="gridCol headerCol">Source</div>
-          <div className="gridCol headerCol">Frequency</div>
-          <div className="gridCol headerCol">Amount</div>
-          <div className="gridCol headerCol">Yearly Increase</div>
-          <div className="gridCol headerCol">Available from</div>
-        </div>
-      </div>
+      <Funds className="savings" />
       <div className="calendar">
         {showCalendarView ? (
           <div className="gridRow headerRow">

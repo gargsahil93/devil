@@ -18,16 +18,9 @@ export default function PropertyDetails({}) {
 
   useEffect(() => {
     dispatch(updatePropertyDetails(getPropertyDetails()));
-  }, []);
+  }, [dispatch]);
 
-  const updateDetails = (
-    key: PropertyDetailFields,
-    value?: string | Dayjs | null,
-  ) => {
-    const newDetails = {
-      ...propertyDetails,
-      [key]: value,
-    };
+  const updateDetails = (key: PropertyDetailFields, value?: string | null) => {
     dispatch(updatePropertyDetails({ [key]: value }));
   };
 
@@ -43,6 +36,7 @@ export default function PropertyDetails({}) {
             onChange={(e) =>
               updateDetails(PropertyDetailFields.NAME, e.target.value)
             }
+            id="propertyName"
           />
         </span>
         <span className="item">
@@ -60,7 +54,7 @@ export default function PropertyDetails({}) {
                 newDate ? newDate.toISOString() : '',
               )
             }
-            format="DD/MMM/YYYY"
+            format="DD/MM/YYYY"
           />
         </span>
         <span className="item">
@@ -78,7 +72,7 @@ export default function PropertyDetails({}) {
                 ? dayjs(propertyDetails[PropertyDetailFields.POSSESION_DATE])
                 : null
             }
-            format="DD/MMM/YYYY"
+            format="DD/MM/YYYY"
           />
         </span>
       </div>

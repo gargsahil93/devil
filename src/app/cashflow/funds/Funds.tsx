@@ -1,53 +1,46 @@
-import { Button } from '@mui/material';
+import { Button, IconButton, Tooltip } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { FundType } from './types';
+import { FundType } from '../types/fund';
 import FundHead from './fundHead/FundHead';
 
 import './funds.scss';
 import { getFunds, updateFundsStorage } from './FundModel';
+import { useDispatch, useSelector } from 'react-redux';
+import { addFund, selectFund, updateFunds } from '../lib/reducers/fundSlice';
+import { AddOutlined } from '@mui/icons-material';
 
-export default function Funds({}) {
-  const [funds, setFunds] = useState<Array<FundType>>([]);
+export default function Funds({ className }: { className: string }) {
+  const dispatch = useDispatch();
+  const funds = useSelector(selectFund);
 
   useEffect(() => {
-    setFunds(getFunds());
-  }, []);
+    dispatch(updateFunds(getFunds()));
+  }, [dispatch]);
 
-  const createFund = () => {
-    setFunds((funds) => {
-      const newFunds = [...funds];
-      newFunds.push({ id: `${funds.length}` });
-      return newFunds;
-    });
-  };
-  const updateFund = (updatedFund: FundType) => {
-    setFunds((funds) => {
-      const newFunds = funds.map((fund: FundType) => {
-        if (fund.id === updatedFund.id) {
-          return { ...updatedFund };
-        }
-        return { ...fund };
-      });
-      updateFundsStorage(newFunds);
-      return newFunds;
-    });
-  };
   return (
-    <div>
-      <Button variant="contained" onClick={createFund}>
-        Add Fund Source
-      </Button>
-      <div className="fundHeadHeader">
-        <span className="headerCell">Source</span>
-        <span className="headerCell">Frequency</span>
-        <span className="headerCell">Amount</span>
-        <span className="headerCell">Interest/Yearly Increase %</span>
-        <span className="headerCell">Available From</span>
+    <div className={className}>
+      <div className="gridRow headerRow">
+        <div className="gridCol headerCol quickActions"></div>
+        <div className="gridCol headerCol">Source</div>
+        <div className="gridCol headerCol">Frequency</div>
+        <div className="gridCol headerCol">Amount</div>
+        <div className="gridCol headerCol">Yearly Increase</div>
+        <div className="gridCol headerCol">Available from</div>
       </div>
-      <div className="fundHeads">
-        {funds.map((fund, index) => (
-          <FundHead fund={fund} key={index} setFund={updateFund} />
-        ))}
+      {funds.map((fund, index) => (
+        <FundHead fund={fund} key={index} />
+      ))}
+      <div className="gridRow">
+        <div className="gridCol">
+          <IconButton
+            aria-label="Add Cost Head"
+            onClick={() => dispatch(addFund())}
+          >
+            <Tooltip title="Add Fund Source">
+              <AddOutlined />
+            </Tooltip>
+          </IconButton>
+        </div>
       </div>
     </div>
   );

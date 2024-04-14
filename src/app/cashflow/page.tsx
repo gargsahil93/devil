@@ -15,8 +15,6 @@ export default function Cashflow({}) {
         <div className="cashflowWrapper">
           <PropertyDetails />
           <Grid />
-          {/* <TotalCost /> */}
-          <Funds />
         </div>
       </LocalizationProvider>
     </StoreProvider>

@@ -14,7 +14,7 @@ export const costSlice = createSlice({
   name: 'cost',
   initialState,
   reducers: {
-    updateCost: (state, action) => {
+    updateCost: (_, action) => {
       return action.payload;
     },
     updateCostHead: (

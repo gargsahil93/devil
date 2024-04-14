@@ -22,7 +22,7 @@ export interface BaseFundType {
   [FundFields.ID]: string;
   [FundFields.NAME]?: string;
   [FundFields.VALUE]?: string;
-  [FundFields.AVAILABLE_FROM]?: Dayjs | null;
+  [FundFields.AVAILABLE_FROM]?: string;
 }
 
 export interface FundFrequencyOneTime extends BaseFundType {

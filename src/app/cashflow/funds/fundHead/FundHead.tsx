@@ -1,47 +1,84 @@
-import { FormControl, MenuItem, Select, TextField } from '@mui/material';
+import {
+  FormControl,
+  IconButton,
+  MenuItem,
+  Select,
+  TextField,
+  Tooltip,
+} from '@mui/material';
 import {
   FundFields,
   FundFrequency,
   FundFrequencyRecurring,
   FundType,
-} from '../types';
+} from '../../types/fund';
 import NumberInput from 'app/components/NumberInput';
-import { DatePicker } from '@mui/x-date-pickers';
+import { DateField, DatePicker } from '@mui/x-date-pickers';
 import dayjs, { Dayjs } from 'dayjs';
 
 import './fundHead.scss';
+import { useDispatch } from 'react-redux';
+import { deleteFund, updateFund } from 'app/cashflow/lib/reducers/fundSlice';
+import {
+  DeleteForeverOutlined,
+  DoneOutline,
+  EditOutlined,
+} from '@mui/icons-material';
+import { useState } from 'react';
 
-export default function FundHead({
-  fund,
-  setFund,
-}: {
-  fund: FundType;
-  setFund: (fund: FundType) => void;
-}) {
-  const updateFund = (
-    key: FundFields,
-    value: string | FundFrequency | Dayjs | null,
-  ) => {
-    setFund({ ...fund, [key]: value });
+export default function FundHead({ fund }: { fund: FundType }) {
+  const dispatch = useDispatch();
+
+  const [editFund, setEditFund] = useState(!fund.name);
+
+  const update = (key: FundFields, value: string | FundFrequency) => {
+    dispatch(updateFund({ id: fund.id, key, value }));
   };
+
   return (
-    <div className="fundHead">
-      <span className="cell">
-        <TextField
-          variant="outlined"
-          value={fund[FundFields.NAME] || ''}
-          onChange={(e) => {
-            updateFund(FundFields.NAME, e.target.value);
-          }}
-        />
+    <div className="gridRow">
+      <span className="rowCell quickActions">
+        <IconButton
+          aria-label="Delete Cost Head"
+          onClick={() => dispatch(deleteFund({ id: fund.id }))}
+        >
+          <Tooltip title="Delete Cost Head">
+            <DeleteForeverOutlined />
+          </Tooltip>
+        </IconButton>
+        <Tooltip title={editFund ? 'Confirm' : 'Edit Fund Source'}>
+          <IconButton onClick={() => setEditFund((edit) => !edit)}>
+            {editFund ? <DoneOutline /> : <EditOutlined />}
+          </IconButton>
+        </Tooltip>
       </span>
-      <span className="cell">
+      <Tooltip title={fund.name}>
+        {editFund ? (
+          <span className="gridCol">
+            <TextField
+              size="small"
+              variant="standard"
+              value={fund[FundFields.NAME] || ''}
+              onChange={(e) => {
+                update(FundFields.NAME, e.target.value);
+              }}
+            />
+          </span>
+        ) : (
+          <span className="gridCol">{fund.name}</span>
+        )}
+      </Tooltip>
+
+      <span className="gridCol">
         <FormControl fullWidth>
           <Select
+            size="small"
+            variant="standard"
             value={fund[FundFields.FREQUENCY] ?? ''}
             onChange={(e) => {
-              updateFund(FundFields.FREQUENCY, e.target.value);
+              update(FundFields.FREQUENCY, e.target.value);
             }}
+            id={`frequency_${fund.id}`}
           >
             <MenuItem value={FundFrequency.ONE_TIME}>One time</MenuItem>
             <MenuItem value={FundFrequency.MONTHLY}>Monthly</MenuItem>
@@ -51,20 +88,20 @@ export default function FundHead({
           </Select>
         </FormControl>
       </span>
-      <span className="cell">
+      <span className="gridCol">
         <NumberInput
           value={fund[FundFields.VALUE] || ''}
           setValue={(e) => {
-            updateFund(FundFields.VALUE, e.target.value);
+            update(FundFields.VALUE, e.target.value);
           }}
         />
       </span>
-      <span className="cell">
+      <span className="gridCol">
         {fund[FundFields.FREQUENCY] === FundFrequency.ONE_TIME ? (
           <NumberInput
             value={fund[FundFields.INTEREST] || ''}
             setValue={(e) => {
-              updateFund(FundFields.INTEREST, e.target.value);
+              update(FundFields.INTEREST, e.target.value);
             }}
           />
         ) : (
@@ -74,17 +111,26 @@ export default function FundHead({
               ''
             }
             setValue={(e) => {
-              updateFund(FundFields.YEARLY_INCREMENT, e.target.value);
+              update(FundFields.YEARLY_INCREMENT, e.target.value);
             }}
           />
         )}
       </span>
-      <span className="cell">
-        <DatePicker
-          value={fund[FundFields.AVAILABLE_FROM] || null}
+      <span className="gridCol">
+        <DateField
+          value={
+            fund[FundFields.AVAILABLE_FROM]
+              ? dayjs(fund[FundFields.AVAILABLE_FROM])
+              : null
+          }
           onChange={(newDate) => {
-            updateFund(FundFields.AVAILABLE_FROM, newDate);
+            newDate &&
+              newDate.isValid() &&
+              update(FundFields.AVAILABLE_FROM, newDate.toISOString());
           }}
+          size="small"
+          variant="standard"
+          format="DD/MM/YYYY"
         />
       </span>
     </div>

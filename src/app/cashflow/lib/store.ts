@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import costReducer from 'app/cashflow/lib/reducers/costSlice';
+import fundReducer from 'app/cashflow/lib/reducers/fundSlice';
 import propertyDetailsReducer from 'app/cashflow/lib/reducers/propertyDetailsSlice';
 export const makeStore = () => {
   return configureStore({
     reducer: {
       cost: costReducer,
       propertyDetails: propertyDetailsReducer,
+      fund: fundReducer,
     },
   });
 };
