@@ -8,7 +8,7 @@ import {
 } from 'app/initialData/costHeads';
 import { ChangeEvent, useEffect, useState } from 'react';
 import './totalCost.scss';
-import CostHead from './costHead/CostHead';
+import CostHead from '../costHead/CostHead';
 import { CostHeadType } from '../types/cost';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 

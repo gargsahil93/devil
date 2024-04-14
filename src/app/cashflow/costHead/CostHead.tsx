@@ -1,10 +1,12 @@
 import {
   FormControl,
+  IconButton,
   InputLabel,
   MenuItem,
   Select,
   Switch,
   TextField,
+  Tooltip,
 } from '@mui/material';
 import { SelectChangeEvent } from '@mui/material/Select';
 import NumberInput from 'app/components/NumberInput';
@@ -14,7 +16,14 @@ import {
   CostHeadType,
   PaymentScheduleType,
 } from 'app/cashflow/types/cost';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
+import {
+  DeleteForeverOutlined,
+  DoneOutline,
+  EditOutlined,
+} from '@mui/icons-material';
+import { useDispatch } from 'react-redux';
+import { deleteCostHead } from '../lib/reducers/costSlice';
 
 export default function CostHead({
   cost,
@@ -27,12 +36,22 @@ export default function CostHead({
     value?: string | number | boolean,
   ) => void;
 }) {
+  const dispatch = useDispatch();
+  const [editHead, setEditHead] = useState(cost.label === '');
+
+  const { label, value, gst, id, paymentSchedule, tdsApplicable } = cost;
+
   const updateValue = (
-    e: ChangeEvent<HTMLInputElement> | SelectChangeEvent<PaymentScheduleType>,
+    e:
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+      | SelectChangeEvent<PaymentScheduleType>,
   ) => {
     const key = e.target.name.split('_')[0];
     let value;
     switch (key) {
+      case CostHeadFields.LABEL:
+        value = e.target.value;
+        break;
       case CostHeadFields.VALUE:
       case CostHeadFields.GST:
       case CostHeadFields.PAYMENT_SCHEDULE:
@@ -47,10 +66,39 @@ export default function CostHead({
     updateCostHead(cost.id, key, value);
   };
 
-  const { label, value, gst, id, paymentSchedule, tdsApplicable } = cost;
   return (
     <div className="costHeadRow">
-      <span className="rowCell head">{label}</span>
+      <span className="rowCell quickActions">
+        <IconButton
+          aria-label="Delete Cost Head"
+          onClick={() => dispatch(deleteCostHead({ id: cost.id }))}
+        >
+          <Tooltip title="Delete Cost Head">
+            <DeleteForeverOutlined />
+          </Tooltip>
+        </IconButton>
+        <Tooltip title={editHead ? 'Confirm' : 'Edit Cost Head'}>
+          <IconButton onClick={() => setEditHead((edit) => !edit)}>
+            {editHead ? <DoneOutline /> : <EditOutlined />}
+          </IconButton>
+        </Tooltip>
+      </span>
+      <Tooltip title={label}>
+        {editHead ? (
+          <span className="rowCell head">
+            <TextField
+              size="small"
+              variant="standard"
+              value={label}
+              id={`label_${id}`}
+              name={`label_${id}`}
+              onChange={updateValue}
+            />
+          </span>
+        ) : (
+          <span className="rowCell head">{label}</span>
+        )}
+      </Tooltip>
       <span className="rowCell cost">
         <NumberInput
           value={value ? `${value}` : ''}
@@ -97,6 +145,7 @@ export default function CostHead({
             <MenuItem value={PaymentScheduleType.INSTALLMENTS}>
               In installments
             </MenuItem>
+            <MenuItem value={PaymentScheduleType.CUSTOM}>Custom</MenuItem>
           </Select>
         </FormControl>
       </span>

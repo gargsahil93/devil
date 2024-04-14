@@ -1,18 +1,20 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  addCostHead,
   selectCost,
   updateCost,
   updateCostHead,
 } from '../lib/reducers/costSlice';
-import CostHead from '../totalCost/costHead/CostHead';
-import { Button } from '@mui/material';
+import CostHead from '../costHead/CostHead';
+import { Button, IconButton, Tooltip } from '@mui/material';
 import { CostHeadFields, CostHeadType } from '../types/cost';
 import {
   getCostHeads,
   initCostHeads,
   setCostHeads as setGlobalCostHeads,
 } from 'app/initialData/costHeads';
+import { AddOutlined } from '@mui/icons-material';
 
 export default function Cost({ className }: { className: string }) {
   const dispatch = useDispatch();
@@ -21,17 +23,7 @@ export default function Cost({ className }: { className: string }) {
 
   useEffect(() => {
     dispatch(updateCost(getCostHeads()));
-  }, []);
-
-  const updateLocalCost = (cost: CostHeadType) => {
-    const newCostHeads = costHeads.map((costHead) => {
-      if (costHead.id === cost.id) {
-        return { ...cost };
-      }
-      return { ...costHead };
-    });
-    setGlobalCostHeads(newCostHeads);
-  };
+  }, [dispatch]);
 
   const updateHead = (
     id: string,
@@ -44,6 +36,7 @@ export default function Cost({ className }: { className: string }) {
   return (
     <div className={className}>
       <div className="gridRow headerRow">
+        <div className="gridCol headerCol quickActions"></div>
         <div className="gridCol headerCol">HEAD</div>
         <div className="gridCol headerCol">COST</div>
         <div className="gridCol headerCol">GST %</div>
@@ -53,15 +46,18 @@ export default function Cost({ className }: { className: string }) {
         <div className="gridCol headerCol">PAYMENT SCHEDULE</div>
       </div>
       {costHeads.map((head, idx) => (
-        <CostHead
-          cost={head}
-          updateCostHead={updateHead}
-          key={idx}
-        />
+        <CostHead cost={head} updateCostHead={updateHead} key={idx} />
       ))}
       <div className="gridRow">
         <div className="gridCol">
-          <Button size="small">Add cost head</Button>
+          <IconButton
+            aria-label="Add Cost Head"
+            onClick={() => dispatch(addCostHead())}
+          >
+            <Tooltip title="Add Cost Head">
+              <AddOutlined />
+            </Tooltip>
+          </IconButton>
         </div>
       </div>
     </div>

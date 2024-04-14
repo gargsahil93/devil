@@ -39,15 +39,21 @@
     display: flex;
     flex-direction: row;
     gap: 1rem;
+  }
 
-    .gridCol {
-      height: 100%;
-      min-width: 10rem;
-      flex-shrink: 0;
-    }
+  .gridCol {
+    height: 100%;
+    min-width: 10rem;
+    flex-shrink: 0;
   }
 
   .headerRow {
     font-weight: bold;
+  }
+
+  .quickActions {
+    flex: none;
+    width: 5rem;
+    min-width: unset;
   }
 }

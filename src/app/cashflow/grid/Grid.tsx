@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import { selectCost, updateCost } from '../lib/reducers/costSlice';
 import { getCostHeads } from 'app/initialData/costHeads';
-import CostHead from '../totalCost/costHead/CostHead';
+import CostHead from '../costHead/CostHead';
 import Cost from '../cost/Cost';
 
 const dateToString = (date: Date) => {

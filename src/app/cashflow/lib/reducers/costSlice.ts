@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-import { CostHeadFields, CostHeadType } from 'app/cashflow/types/cost';
+import { v4 as uuidv4 } from 'uuid';
+import {
+  CostHeadFields,
+  CostHeadType,
+  PaymentScheduleType,
+} from 'app/cashflow/types/cost';
 import { setCostHeads as setGlobalCostHeads } from 'app/initialData/costHeads';
 
 const initialState: Array<CostHeadType> = [];
@@ -33,10 +38,31 @@ export const costSlice = createSlice({
       setGlobalCostHeads(newState);
       return newState;
     },
+    addCostHead: (state, action: { type: string; payload: void }) => {
+      const newState = [...state];
+      newState.push({
+        [CostHeadFields.ID]: uuidv4(),
+        [CostHeadFields.LABEL]: '',
+        [CostHeadFields.GST]: 0,
+        [CostHeadFields.PAYMENT_SCHEDULE]: PaymentScheduleType.CUSTOM,
+        [CostHeadFields.TDS_APPLICABLE]: false,
+      });
+      setGlobalCostHeads(newState);
+      return newState;
+    },
+    deleteCostHead: (
+      state,
+      action: { type: string; payload: { id: string } },
+    ) => {
+      const newState = state.filter((head) => head.id !== action.payload.id);
+      setGlobalCostHeads(newState);
+      return newState;
+    },
   },
 });
 
-export const { updateCost, updateCostHead } = costSlice.actions;
+export const { addCostHead, deleteCostHead, updateCost, updateCostHead } =
+  costSlice.actions;
 
 export const selectCost = (state: RootState) => state.cost;
 
