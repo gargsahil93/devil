@@ -9,8 +9,8 @@ export enum CostHeadFields {
 
 export type CostHeadType = {
   [CostHeadFields.ID]: string;
-  [CostHeadFields.LABEL]: string;
-  [CostHeadFields.GST]: number;
+  [CostHeadFields.LABEL]?: string;
+  [CostHeadFields.GST]?: number;
   [CostHeadFields.VALUE]?: number;
   [CostHeadFields.PAYMENT_SCHEDULE]: PaymentScheduleType;
   [CostHeadFields.TDS_APPLICABLE]: boolean;

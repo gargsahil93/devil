@@ -27,7 +27,7 @@ import { deleteCostHead, updateCostHead } from '../lib/reducers/costSlice';
 
 export default function CostHead({ cost }: { cost: CostHeadType }) {
   const dispatch = useDispatch();
-  const [editHead, setEditHead] = useState(cost.label === '');
+  const [editHead, setEditHead] = useState(!cost.label);
 
   const { label, value, gst, id, paymentSchedule, tdsApplicable } = cost;
 
@@ -99,17 +99,17 @@ export default function CostHead({ cost }: { cost: CostHeadType }) {
       </span>
       <span className="rowCell gst">
         <NumberInput
-          value={'' + gst}
+          value={`${gst ? gst : ''}`}
           setValue={updateValue}
           id={`gst_${id}`}
           name={`gst_${id}`}
         />
       </span>
       <span className="rowCell gstValue">
-        {(((value || 0) * gst) / 100).toFixed(2)}
+        {gst ? (((value || 0) * gst) / 100).toFixed(2) : 0}
       </span>
       <span className="rowCell total">
-        {((value || 0) * (1 + gst / 100)).toFixed(2)}
+        {((value || 0) * (1 + (gst || 0) / 100)).toFixed(2)}
       </span>
       <span className="rowCell tds">
         <Switch

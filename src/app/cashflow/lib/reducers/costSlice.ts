@@ -42,8 +42,6 @@ export const costSlice = createSlice({
       const newState = [...state];
       newState.push({
         [CostHeadFields.ID]: uuidv4(),
-        [CostHeadFields.LABEL]: '',
-        [CostHeadFields.GST]: 0,
         [CostHeadFields.PAYMENT_SCHEDULE]: PaymentScheduleType.CUSTOM,
         [CostHeadFields.TDS_APPLICABLE]: false,
       });
