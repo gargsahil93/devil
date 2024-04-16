@@ -1,5 +1,6 @@
 import { TextField } from '@mui/material';
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import SmartTextField from './SmartTextField';
 
 export default function NumberInput({
   value,
@@ -17,6 +18,7 @@ export default function NumberInput({
   const [error, setError] = useState(false);
   const [helperText, setHelperText] = useState('');
   const [localValue, setLocalValue] = useState(value);
+  const [edit, setEdit] = useState(false);
 
   const inputChanged = (e: ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
@@ -32,7 +34,7 @@ export default function NumberInput({
   };
 
   return (
-    <TextField
+    <SmartTextField
       size="small"
       variant="standard"
       label={label}
@@ -44,4 +46,21 @@ export default function NumberInput({
       name={name}
     />
   );
+
+  // return !edit ? (
+  //   <span onClick={() => setEdit(true)}>{value || 0}</span>
+  // ) : (
+  //   <TextField
+  //     size="small"
+  //     variant="standard"
+  //     label={label}
+  //     onChange={inputChanged}
+  //     value={localValue}
+  //     error={error}
+  //     helperText={helperText}
+  //     id={id}
+  //     name={name}
+  //     onBlur={() => setEdit(false)}
+  //   />
+  // );
 }

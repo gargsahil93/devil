@@ -24,10 +24,10 @@ import {
 } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
 import { deleteCostHead, updateCostHead } from '../lib/reducers/costSlice';
+import SmartTextField from 'app/components/SmartTextField';
 
 export default function CostHead({ cost }: { cost: CostHeadType }) {
   const dispatch = useDispatch();
-  const [editHead, setEditHead] = useState(!cost.label);
 
   const { label, value, gst, id, paymentSchedule, tdsApplicable } = cost;
 
@@ -67,27 +67,19 @@ export default function CostHead({ cost }: { cost: CostHeadType }) {
             <DeleteForeverOutlined />
           </Tooltip>
         </IconButton>
-        <Tooltip title={editHead ? 'Confirm' : 'Edit Cost Head'}>
-          <IconButton onClick={() => setEditHead((edit) => !edit)}>
-            {editHead ? <DoneOutline /> : <EditOutlined />}
-          </IconButton>
-        </Tooltip>
       </span>
       <Tooltip title={label}>
-        {editHead ? (
-          <span className="rowCell head">
-            <TextField
-              size="small"
-              variant="standard"
-              value={label}
-              id={`label_${id}`}
-              name={`label_${id}`}
-              onChange={updateValue}
-            />
-          </span>
-        ) : (
-          <span className="rowCell head">{label}</span>
-        )}
+        <span className="rowCell head">
+          <SmartTextField
+            size="small"
+            variant="standard"
+            value={label}
+            id={`label_${id}`}
+            name={`label_${id}`}
+            onChange={updateValue}
+            zeroValue="Cost Head"
+          />
+        </span>
       </Tooltip>
       <span className="rowCell cost">
         <NumberInput

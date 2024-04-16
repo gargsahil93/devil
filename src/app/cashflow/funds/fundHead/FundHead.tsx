@@ -25,11 +25,10 @@ import {
   EditOutlined,
 } from '@mui/icons-material';
 import { useState } from 'react';
+import SmartTextField from 'app/components/SmartTextField';
 
 export default function FundHead({ fund }: { fund: FundType }) {
   const dispatch = useDispatch();
-
-  const [editFund, setEditFund] = useState(!fund.name);
 
   const update = (key: FundFields, value: string | FundFrequency) => {
     dispatch(updateFund({ id: fund.id, key, value }));
@@ -46,27 +45,19 @@ export default function FundHead({ fund }: { fund: FundType }) {
             <DeleteForeverOutlined />
           </Tooltip>
         </IconButton>
-        <Tooltip title={editFund ? 'Confirm' : 'Edit Fund Source'}>
-          <IconButton onClick={() => setEditFund((edit) => !edit)}>
-            {editFund ? <DoneOutline /> : <EditOutlined />}
-          </IconButton>
-        </Tooltip>
       </span>
       <Tooltip title={fund.name}>
-        {editFund ? (
-          <span className="gridCol">
-            <TextField
-              size="small"
-              variant="standard"
-              value={fund[FundFields.NAME] || ''}
-              onChange={(e) => {
-                update(FundFields.NAME, e.target.value);
-              }}
-            />
-          </span>
-        ) : (
-          <span className="gridCol">{fund.name}</span>
-        )}
+        <span className="gridCol">
+          <SmartTextField
+            size="small"
+            variant="standard"
+            value={fund[FundFields.NAME] || ''}
+            onChange={(e) => {
+              update(FundFields.NAME, e.target.value);
+            }}
+            zeroValue="Fund Source"
+          />
+        </span>
       </Tooltip>
 
       <span className="gridCol">
