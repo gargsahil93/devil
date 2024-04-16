@@ -37,7 +37,7 @@ export default function FundHead({ fund }: { fund: FundType }) {
 
   return (
     <div className="gridRow">
-      <span className="rowCell quickActions">
+      <span className="gridCol quickActions">
         <IconButton
           aria-label="Delete Cost Head"
           onClick={() => dispatch(deleteFund({ id: fund.id }))}

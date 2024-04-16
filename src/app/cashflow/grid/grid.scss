@@ -2,6 +2,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;
 
   .cost {
     grid-column-start: 1;
@@ -31,7 +32,7 @@
     display: grid;
     overflow-x: scroll;
     overflow-y: hidden;
-    background-color: green;
+    align-content: baseline;
   }
 
   .gridRow {
@@ -43,8 +44,8 @@
   }
 
   .gridCol {
-    height: 100%;
     min-width: 10rem;
+    overflow: hidden;
   }
 
   .headerRow {
