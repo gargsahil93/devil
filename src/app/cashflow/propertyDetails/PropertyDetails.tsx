@@ -48,14 +48,15 @@ export default function PropertyDetails({}) {
                 ? dayjs(propertyDetails[PropertyDetailFields.BOOKING_DATE])
                 : null
             }
-            onChange={(newDate) =>
-              newDate &&
-              newDate.isValid() &&
-              updateDetails(
-                PropertyDetailFields.BOOKING_DATE,
-                newDate.toISOString(),
-              )
-            }
+            onChange={(newDate) => {
+              if (!newDate)
+                updateDetails(PropertyDetailFields.BOOKING_DATE, '');
+              if (newDate?.isValid())
+                updateDetails(
+                  PropertyDetailFields.BOOKING_DATE,
+                  newDate.toISOString(),
+                );
+            }}
             format="DD/MM/YYYY"
           />
         </span>
@@ -63,14 +64,15 @@ export default function PropertyDetails({}) {
           <DatePicker
             label="Possesion date"
             name={PropertyDetailFields.POSSESION_DATE}
-            onChange={(newDate) =>
-              newDate &&
-              newDate.isValid() &&
-              updateDetails(
-                PropertyDetailFields.POSSESION_DATE,
-                newDate.toISOString(),
-              )
-            }
+            onChange={(newDate) => {
+              if (!newDate)
+                updateDetails(PropertyDetailFields.POSSESION_DATE, '');
+              if (newDate?.isValid())
+                updateDetails(
+                  PropertyDetailFields.POSSESION_DATE,
+                  newDate.toISOString(),
+                );
+            }}
             value={
               propertyDetails[PropertyDetailFields.POSSESION_DATE]
                 ? dayjs(propertyDetails[PropertyDetailFields.POSSESION_DATE])

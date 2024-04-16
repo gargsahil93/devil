@@ -12,14 +12,17 @@ export const calendarSlice = createSlice({
       state,
       {
         type,
-        payload,
+        payload: { bookingDate, possesionDate },
       }: {
         type: string;
         payload: { bookingDate: string; possesionDate: string };
       },
     ) => {
-      const firstDate = new Date(payload.bookingDate);
-      const lastDate = new Date(payload.possesionDate);
+      if (!bookingDate || !possesionDate) {
+        return state;
+      }
+      const firstDate = new Date(bookingDate);
+      const lastDate = new Date(possesionDate);
       const dateArray = [];
       let currentDate = firstDate;
       while (currentDate.getTime() <= lastDate.getTime()) {
