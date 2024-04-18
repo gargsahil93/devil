@@ -57,7 +57,8 @@ export default function PropertyDetails({}) {
                   newDate.toISOString(),
                 );
             }}
-            format="DD/MM/YYYY"
+            // format="DD/MM/YYYY"
+            views={['month', 'year']}
           />
         </span>
         <span className="item">
@@ -78,7 +79,8 @@ export default function PropertyDetails({}) {
                 ? dayjs(propertyDetails[PropertyDetailFields.POSSESION_DATE])
                 : null
             }
-            format="DD/MM/YYYY"
+            // format="MMM/YYYY"
+            views={['month', 'year']}
           />
         </span>
       </div>

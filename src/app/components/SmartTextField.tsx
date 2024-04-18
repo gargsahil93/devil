@@ -10,7 +10,12 @@ export default function SmartTextField({
   const [edit, setEdit] = useState(false);
 
   return !edit ? (
-    <span className="editableValue" onClick={() => setEdit(true)}>
+    <span
+      className="editableValue"
+      //   onClick={() => setEdit(true)}
+      tabIndex={0}
+      onFocus={() => setEdit(true)}
+    >
       {(props.value || zeroValue) as ReactNode}
     </span>
   ) : (

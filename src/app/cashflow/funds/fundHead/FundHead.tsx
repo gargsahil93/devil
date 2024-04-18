@@ -121,7 +121,7 @@ export default function FundHead({ fund }: { fund: FundType }) {
           }}
           size="small"
           variant="standard"
-          format="DD/MM/YYYY"
+          format="MMM/YYYY"
         />
       </span>
     </div>
