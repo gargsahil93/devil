@@ -10,8 +10,7 @@ import {
   updateCalendarCost,
   updateCalendarDates,
 } from '../lib/reducers/calendarSlice';
-import costSlice, { selectCost } from '../lib/reducers/costSlice';
-import NumberInput from 'app/components/NumberInput';
+import { selectCost } from '../lib/reducers/costSlice';
 import { selectFund } from '../lib/reducers/fundSlice';
 import { PaymentScheduleType } from '../types/cost';
 import { IconButton, Tooltip } from '@mui/material';

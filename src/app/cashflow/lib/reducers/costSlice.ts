@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { RootState } from '../../../lib/store';
 import { v4 as uuidv4 } from 'uuid';
 import {
   CostHeadFields,

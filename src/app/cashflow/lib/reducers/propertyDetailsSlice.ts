@@ -1,5 +1,5 @@
 import { Dispatch, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { RootState } from '../../../lib/store';
 import dayjs, { Dayjs } from 'dayjs';
 import {
   PropertyDetailFields,
@@ -9,11 +9,7 @@ import { setPropertyDetails } from 'app/cashflow/propertyDetails/PropertyDetails
 
 export const propertyDetailsSlice = createSlice({
   name: 'propertyDetails',
-  initialState: {
-    name: '',
-    bookingDate: '',
-    possesionDate: '',
-  },
+  initialState: { name: '', bookingDate: '', possesionDate: '' },
   reducers: {
     updatePropertyDetails: (state, action) => {
       const newState = { ...state, ...action.payload };

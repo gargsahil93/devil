@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { RootState } from '../../../lib/store';
 import { CalendarDateType } from 'app/cashflow/types/calendar';
 import { setLocalStorage } from 'app/helpers/localStorageHelper';
 import dayjs from 'dayjs';
@@ -72,10 +72,7 @@ export const calendarSlice = createSlice({
       {
         type,
         payload,
-      }: {
-        type: string;
-        payload: { id: string; value: string; date: string };
-      },
+      }: { type: string; payload: { id: string; value: string; date: string } },
     ) => {
       const newState = { ...state };
       const date = formatDate(new Date(payload.date));

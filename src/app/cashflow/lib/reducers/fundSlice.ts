@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../store';
+import { RootState } from '../../../lib/store';
 import { FundFields, FundType } from 'app/cashflow/types/fund';
 import { updateFundsStorage } from 'app/cashflow/funds/FundModel';
 import { v4 as uuidv4 } from 'uuid';
@@ -36,9 +36,7 @@ export const fundSlice = createSlice({
     },
     addFund: (state, action: { type: string; payload: void }) => {
       const newState = [...state];
-      newState.push({
-        [FundFields.ID]: uuidv4(),
-      });
+      newState.push({ [FundFields.ID]: uuidv4() });
       updateFundsStorage(newState);
       return newState;
     },
