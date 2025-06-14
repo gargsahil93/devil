@@ -22,6 +22,8 @@ import {
 } from '@mui/icons-material';
 import { FundFields, FundFrequency } from '../types/fund';
 import { getLocalStorage } from 'app/helpers/localStorageHelper';
+import CalendarRow from '../calendarRow/CalendarRow';
+import TotalCostRow from '../totalCostRow/TotalCostRow';
 
 export default function Grid() {
   const dispatch = useDispatch();
@@ -74,7 +76,7 @@ export default function Grid() {
         right: 0,
       };
     });
-    Object.values(calendarDates).forEach((dateCost) => {
+    Object.values(calendarDates || {}).forEach((dateCost) => {
       Object.keys(costMap).forEach((costId) => {
         costMap[costId].right += +(dateCost[costId] || 0);
       });
@@ -96,7 +98,9 @@ export default function Grid() {
                   <CheckCircleOutline color="success"></CheckCircleOutline>
                 </Tooltip>
               ) : (
-                <Tooltip title="Put values correctly">
+                <Tooltip
+                  title={`${costMap[cost.id].left - costMap[cost.id].right} remaining`}
+                >
                   <DangerousOutlined color="warning"></DangerousOutlined>
                 </Tooltip>
               )}
@@ -108,7 +112,10 @@ export default function Grid() {
             </div>
           );
         })}
-        <div className="gridRow"></div>
+        <div className="gridRow dummyRowAddCost"></div>
+        <div className="gridRow dummyRowTotal"></div>
+        <div className="gridRow dummyRowBuilderPayment"></div>
+        <div className="gridRow dummyRowTDS"></div>
         <div className="gridRow"></div>
         {funds.map((fund, idx) => {
           return (
@@ -131,66 +138,21 @@ export default function Grid() {
         {showCalendarView ? (
           <>
             <div className="gridRow headerRow">
-              {Object.keys(calendarDates).map((date, idx) => {
-                return (
-                  <div className="gridCol headerCol" key={idx}>
-                    {date}
-                  </div>
-                );
-              })}
+              {Object.keys(calendarDates).map((date, idx) => (
+                <div className="gridCol headerCol" key={idx}>
+                  {date}
+                </div>
+              ))}
             </div>
-            {costHeads.map((cost, idx) => {
-              return (
-                <div className="gridRow" key={idx}>
-                  {Object.keys(calendarDates).map((date, idx) => {
-                    return (
-                      <span className="gridCol" key={idx}>
-                        <NumberInput
-                          id={`${cost.id}_${date}`}
-                          value={calendarDates[date]?.[cost.id] || ''}
-                          setValue={(e) => {
-                            dispatch(
-                              updateCalendarCost({
-                                date,
-                                id: cost.id,
-                                value: e.target.value,
-                              }),
-                            );
-                          }}
-                        />
-                      </span>
-                    );
-                  })}
-                </div>
-              );
-            })}
+            {costHeads.map((cost, idx) => (
+              <CalendarRow id={cost.id} key={idx} />
+            ))}
             <div className="gridRow"></div>
+            <TotalCostRow />
             <div className="gridRow"></div>
-            {funds.map((fund, idx) => {
-              return (
-                <div className="gridRow" key={idx}>
-                  {Object.keys(calendarDates).map((date, idx) => {
-                    return (
-                      <span className="gridCol" key={idx}>
-                        <NumberInput
-                          id={`${fund.id}_${date}`}
-                          value=""
-                          setValue={(e) => {
-                            dispatch(
-                              updateCalendarCost({
-                                date,
-                                id: fund.id,
-                                value: e.target.value,
-                              }),
-                            );
-                          }}
-                        />
-                      </span>
-                    );
-                  })}
-                </div>
-              );
-            })}
+            {funds.map((fund, idx) => (
+              <CalendarRow id={fund.id} key={idx} />
+            ))}
           </>
         ) : (
           <div>

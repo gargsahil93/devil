@@ -52,6 +52,30 @@ export default function Cost({ className }: { className: string }) {
           </IconButton>
         </div>
       </div>
+      <div className="gridRow">
+        <div className="gridCol quickActions"></div>
+        <div className="gridCol">Total</div>
+        <div className="gridCol"></div>
+        <div className="gridCol"></div>
+        <div className="gridCol"></div>
+        <div className="gridCol">
+          {costHeads
+            .reduce(
+              (sum, cost) =>
+                sum + (cost.value || 0) * (1 + (cost.gst || 0) / 100),
+              0,
+            )
+            .toFixed(2)}
+        </div>
+      </div>
+      <div className="gridRow">
+        <div className="gridCol quickActions"></div>
+        <div className="">To pay builder</div>
+      </div>
+      <div className="gridRow">
+        <div className="gridCol quickActions"></div>
+        <div className="">TDS payable</div>
+      </div>
     </div>
   );
 }
