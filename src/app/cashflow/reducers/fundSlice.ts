@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../../lib/store';
+import { RootState } from '../../lib/store';
 import { FundFields, FundType } from 'app/cashflow/types/fund';
 import { updateFundsStorage } from 'app/cashflow/funds/FundModel';
 import { v4 as uuidv4 } from 'uuid';

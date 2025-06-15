@@ -1,5 +1,5 @@
 import { Dispatch, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../../lib/store';
+import { RootState } from '../../lib/store';
 import dayjs, { Dayjs } from 'dayjs';
 import {
   PropertyDetailFields,

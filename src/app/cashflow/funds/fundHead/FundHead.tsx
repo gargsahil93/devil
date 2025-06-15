@@ -18,7 +18,7 @@ import dayjs, { Dayjs } from 'dayjs';
 
 import './fundHead.scss';
 import { useDispatch } from 'react-redux';
-import { deleteFund, updateFund } from 'app/cashflow/lib/reducers/fundSlice';
+import { deleteFund, updateFund } from 'app/cashflow/reducers/fundSlice';
 import {
   DeleteForeverOutlined,
   DoneOutline,

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectPropertyDetails,
   updatePropertyDetails,
-} from '../lib/reducers/propertyDetailsSlice';
+} from '../reducers/propertyDetailsSlice';
 import { getPropertyDetails, setPropertyDetails } from './PropertyDetailsModel';
 import './propertyDetails.scss';
 import { PropertyDetailFields } from '../types/propertyDetails';

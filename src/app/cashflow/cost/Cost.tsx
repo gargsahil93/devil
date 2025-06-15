@@ -5,7 +5,7 @@ import {
   selectCost,
   updateCost,
   updateCostHead,
-} from '../lib/reducers/costSlice';
+} from '../reducers/costSlice';
 import CostHead from '../costHead/CostHead';
 import { Button, IconButton, Tooltip } from '@mui/material';
 import { CostHeadFields, CostHeadType } from '../types/cost';

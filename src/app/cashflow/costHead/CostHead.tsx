@@ -23,7 +23,7 @@ import {
   EditOutlined,
 } from '@mui/icons-material';
 import { useDispatch } from 'react-redux';
-import { deleteCostHead, updateCostHead } from '../lib/reducers/costSlice';
+import { deleteCostHead, updateCostHead } from '../reducers/costSlice';
 import SmartTextField from 'app/components/SmartTextField';
 
 export default function CostHead({ cost }: { cost: CostHeadType }) {

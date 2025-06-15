@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import costReducer from 'app/cashflow/lib/reducers/costSlice';
-import fundReducer from 'app/cashflow/lib/reducers/fundSlice';
-import calendarReducer from 'app/cashflow/lib/reducers/calendarSlice';
-import propertyDetailsReducer from 'app/cashflow/lib/reducers/propertyDetailsSlice';
+import costReducer from 'app/cashflow/reducers/costSlice';
+import fundReducer from 'app/cashflow/reducers/fundSlice';
+import calendarReducer from 'app/cashflow/reducers/calendarSlice';
+import propertyDetailsReducer from 'app/cashflow/reducers/propertyDetailsSlice';
 import { enableMapSet } from 'immer';
 export const makeStore = () => {
   enableMapSet();

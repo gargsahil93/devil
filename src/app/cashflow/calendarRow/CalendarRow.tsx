@@ -1,8 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  selectCalendar,
-  updateCalendarCost,
-} from '../lib/reducers/calendarSlice';
+import { selectCalendar, updateCalendarCost } from '../reducers/calendarSlice';
 import NumberInput from 'app/components/NumberInput';
 
 export default function CalendarRow({ id }: { id: string }) {
@@ -18,11 +15,7 @@ export default function CalendarRow({ id }: { id: string }) {
               value={calendarDates[date]?.[id] || ''}
               setValue={(e) => {
                 dispatch(
-                  updateCalendarCost({
-                    date,
-                    id: id,
-                    value: e.target.value,
-                  }),
+                  updateCalendarCost({ date, id: id, value: e.target.value }),
                 );
               }}
             />

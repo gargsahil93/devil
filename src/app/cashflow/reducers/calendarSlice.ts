@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../../../lib/store';
+import { RootState } from '../../lib/store';
 import { CalendarDateType } from 'app/cashflow/types/calendar';
 import { setLocalStorage } from 'app/helpers/localStorageHelper';
 import dayjs from 'dayjs';

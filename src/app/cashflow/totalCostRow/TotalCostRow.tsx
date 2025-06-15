@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCalendar } from '../lib/reducers/calendarSlice';
+import { selectCalendar } from '../reducers/calendarSlice';
 import { useEffect, useState } from 'react';
-import { selectCost } from '../lib/reducers/costSlice';
+import { selectCost } from '../reducers/costSlice';
 import { CostHeadFields, CostHeadType } from '../types/cost';
 
 export default function TotalCostRow() {

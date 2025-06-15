@@ -6,7 +6,7 @@ import FundHead from './fundHead/FundHead';
 import './funds.scss';
 import { getFunds, updateFundsStorage } from './FundModel';
 import { useDispatch, useSelector } from 'react-redux';
-import { addFund, selectFund, updateFunds } from '../lib/reducers/fundSlice';
+import { addFund, selectFund, updateFunds } from '../reducers/fundSlice';
 import { AddOutlined } from '@mui/icons-material';
 
 export default function Funds({ className }: { className: string }) {

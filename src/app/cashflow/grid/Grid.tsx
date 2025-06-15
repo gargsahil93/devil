@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import './grid.scss';
-import { selectPropertyDetails } from '../lib/reducers/propertyDetailsSlice';
+import { selectPropertyDetails } from '../reducers/propertyDetailsSlice';
 import { useEffect, useState } from 'react';
 import Cost from '../cost/Cost';
 import Funds from '../funds/Funds';
@@ -9,9 +9,9 @@ import {
   setInitialState,
   updateCalendarCost,
   updateCalendarDates,
-} from '../lib/reducers/calendarSlice';
-import { selectCost } from '../lib/reducers/costSlice';
-import { selectFund } from '../lib/reducers/fundSlice';
+} from '../reducers/calendarSlice';
+import { selectCost } from '../reducers/costSlice';
+import { selectFund } from '../reducers/fundSlice';
 import { PaymentScheduleType } from '../types/cost';
 import { IconButton, Tooltip } from '@mui/material';
 import {
