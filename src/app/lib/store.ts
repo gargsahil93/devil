@@ -3,6 +3,7 @@ import costReducer from 'app/cashflow/reducers/costSlice';
 import fundReducer from 'app/cashflow/reducers/fundSlice';
 import calendarReducer from 'app/cashflow/reducers/calendarSlice';
 import propertyDetailsReducer from 'app/cashflow/reducers/propertyDetailsSlice';
+import loanDetailsReducer from 'app/loan/reducers/loanDetailsSlice';
 import { enableMapSet } from 'immer';
 export const makeStore = () => {
   enableMapSet();
@@ -12,6 +13,7 @@ export const makeStore = () => {
       propertyDetails: propertyDetailsReducer,
       fund: fundReducer,
       calendar: calendarReducer,
+      loanDetails: loanDetailsReducer,
     },
   });
 };

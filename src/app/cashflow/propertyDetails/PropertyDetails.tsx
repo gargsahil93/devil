@@ -7,7 +7,7 @@ import {
   selectPropertyDetails,
   updatePropertyDetails,
 } from '../reducers/propertyDetailsSlice';
-import { getPropertyDetails, setPropertyDetails } from './PropertyDetailsModel';
+import { getPropertyDetails } from './PropertyDetailsModel';
 import './propertyDetails.scss';
 import { PropertyDetailFields } from '../types/propertyDetails';
 

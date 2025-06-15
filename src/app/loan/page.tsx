@@ -3,18 +3,15 @@
 import './page.scss';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import PropertyDetails from './propertyDetails/PropertyDetails';
-import Funds from './funds/Funds';
 import StoreProvider from '../lib/StateProvider';
-import Grid from './grid/Grid';
+import LoanDetails from './loanDetails/LoanDetails';
 
 export default function Cashflow({}) {
   return (
     <StoreProvider>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <div className="cashflowWrapper">
-          <PropertyDetails />
-          <Grid />
+        <div className="loanWrapper">
+          <LoanDetails />
         </div>
       </LocalizationProvider>
     </StoreProvider>

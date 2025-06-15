@@ -5,26 +5,22 @@ import './smartTextField.scss';
 
 export default function SmartTextField({
   zeroValue = '0',
+  onlyEdit = false,
   ...props
-}: TextFieldProps & { zeroValue?: string }) {
-  const [edit, setEdit] = useState(false);
+}: TextFieldProps & { zeroValue?: string; onlyEdit?: boolean }) {
+  const [edit, setEdit] = useState(onlyEdit);
 
   return !edit ? (
-    <span
-      className="editableValue"
-      //   onClick={() => setEdit(true)}
-      tabIndex={0}
-      onFocus={() => setEdit(true)}
-    >
+    <span className="editableValue" tabIndex={0} onFocus={() => setEdit(true)}>
       {(props.value || zeroValue) as ReactNode}
     </span>
   ) : (
     <TextField
       {...props}
-      onBlur={() => setEdit(false)}
+      onBlur={() => setEdit(onlyEdit)}
       onKeyDown={(e) => {
         if (['Enter', 'Escape'].includes(e.key)) {
-          setEdit(false);
+          setEdit(onlyEdit);
         }
       }}
       autoFocus
